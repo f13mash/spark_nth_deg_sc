@@ -1,5 +1,23 @@
 # spark_nth_deg_sc
 
+Dependencies
+* Scala 2.11
+* SBT (http://www.scala-sbt.org/0.13/docs/Setup.html)
+* inside the project directory run, to build the project execute
+
+`sbt clean compile`
+* to run the project execute,
+ 
+`sbt "run feed/user_conn.csv 4"` 
+feed/user_conn.csv is a sample feed file, and 4 is the connection degree
+
+src/main/scala-2.11/Main.scala is the entry-point app
+src/main/scala-2.11/services/UserConn contains the main logic of building and executing the spark jobs
+
+
+
+
+
 To calculate connections uptill nth degree, program uses spark(sql) and runs iteratively each time extending (k)th degree with 1-degree connection to compute connections till (k + 1)th-degree
 
 Example. Connection degree = 3
@@ -18,17 +36,5 @@ Example. Connection degree = 3
 
 Program runs O(N) spark jobs, where N = connection degree, and it can be optimized to use only O(lg(N)) spark jobs, but that would mean persisting much larger data set in memory/disk.
 In the current approach, as connection_list_1 is used at all stages, so it is cached(and can further be broadcasted depending on data-size for further speedup)
-
-
-Dependencies
-* Scala 2.11
-* SBT (http://www.scala-sbt.org/0.13/docs/Setup.html)
-* inside the project directory run, to build the project
-`sbt clean compile`
-to run the project, 
-`sbt "run feed/user_conn.csv 4"` #feed/user_conn.csv is a sample feed file, and 4 is the connection degree
-
-src/main/scala-2.11/Main.scala is the entry-point app
-src/main/scala-2.11/services/UserConn contains the main logic of building and executing the spark jobs
 
 
