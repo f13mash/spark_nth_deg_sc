@@ -29,4 +29,7 @@ sbt clean compile
 to run the project, 
 sbt "run feed/user_conn.csv 4" #feed/user_conn.csv is a sample feed file, and are calculating till 4th degree
 
+src/main/scala-2.11/Main.scala is the entry-point app
+src/main/scala-2.11/services/UserConn contains the main logic of building and executing the spark jobs
+
 
